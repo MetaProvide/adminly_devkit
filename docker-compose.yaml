@@ -1,0 +1,52 @@
+---
+volumes:
+  mariadb:
+  nextcloud:
+
+networks:
+  frontend:
+  backend:
+
+services:
+  mariadb:
+    image: mariadb:10.5
+    restart: always
+    networks:
+      - backend
+    volumes:
+      - mariadb:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: nextcloud
+      MYSQL_USER: nextcloud
+      MYSQL_PASSWORD: nextcloud
+
+  nextcloud:
+    build: ./docker/nextcloud
+    restart: always
+    depends_on:
+      - mariadb
+    networks:
+      - frontend
+      - backend
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    volumes:
+      - nextcloud:/var/www/html
+      - ../adminly_dashboard:/var/www/html/custom_apps/adminly_dashboard
+      - ../adminly_clients:/var/www/html/custom_apps/adminly_clients
+      - ../adminly_appointments:/var/www/html/custom_apps/adminly_appointments
+      - ../adminly_payments:/var/www/html/custom_apps/adminly_payments
+      - ../adminly_calendar:/var/www/html/custom_apps/adminly_calendar
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      MYSQL_DATABASE: nextcloud
+      MYSQL_USER: nextcloud
+      MYSQL_PASSWORD: nextcloud
+      MYSQL_HOST: mariadb:3306
+      NEXTCLOUD_ADMIN_USER: test
+      NEXTCLOUD_ADMIN_PASSWORD: test

@@ -1,0 +1,13 @@
+{
+	"folders": [
+	  {
+		"name": "Devkit",
+		"path": "../"
+	  },
+	  {
+		"name": "Adminly Dashboard",
+		"path": "../../adminly_dashboard"
+	  },
+	],
+	"settings": {}
+}
