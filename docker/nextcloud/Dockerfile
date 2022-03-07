@@ -14,4 +14,6 @@ RUN pecl install xdebug; \
         echo "max_input_time=3600"; \
     } > /usr/local/etc/php/conf.d/nextcloud.ini;
 
+COPY --chown=www-data:root /var/www/html/custom_apps -R
+
 ENV NEXTCLOUD_UPDATE=1
