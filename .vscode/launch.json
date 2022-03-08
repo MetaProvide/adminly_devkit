@@ -11,6 +11,7 @@
             "port": 9003,
             "pathMappings": {
                 "/var/www/html": "${workspaceFolder}/vendor/christophwurst/nextcloud/OCP",
+				"/var/www/html/custom_apps/adminly_core": "${workspaceFolder}/../adminly_core",
 				"/var/www/html/custom_apps/adminly_dashboard": "${workspaceFolder}/../adminly_dashboard",
 				"/var/www/html/custom_apps/adminly_clients": "${workspaceFolder}/../adminly_clients",
 				"/var/www/html/custom_apps/adminly_appointments": "${workspaceFolder}/../adminly_appointments",
