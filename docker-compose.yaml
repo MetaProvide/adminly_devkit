@@ -35,11 +35,8 @@ services:
       - host.docker.internal:host-gateway
     volumes:
       - nextcloud:/var/www/html
+      - ../adminly_core:/var/www/html/custom_apps/adminly_core
       - ../adminly_dashboard:/var/www/html/custom_apps/adminly_dashboard
-      - ../adminly_clients:/var/www/html/custom_apps/adminly_clients
-      - ../adminly_appointments:/var/www/html/custom_apps/adminly_appointments
-      - ../adminly_payments:/var/www/html/custom_apps/adminly_payments
-      - ../adminly_calendar:/var/www/html/custom_apps/adminly_calendar
     ports:
       - "80:80"
       - "443:443"
