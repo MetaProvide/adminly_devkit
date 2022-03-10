@@ -1,17 +1,19 @@
 {
 	"folders": [
-	  {
-		"name": "Devkit",
-		"path": "../"
-	  },
-	  {
-		"name": "Adminly Dashboard",
-		"path": "../../adminly_dashboard"
-	  },
-	  {
-		"name": "Adminly Core",
-		"path": "../../adminly_core"
-	  },
+		{
+			"name": "Devkit",
+			"path": "../"
+		},
+		{
+			"name": "Adminly Dashboard",
+			"path": "../../adminly_dashboard"
+		},
+		{
+			"name": "Adminly Core",
+			"path": "../../adminly_core"
+		}
 	],
-	"settings": {}
+	"settings": {
+		"editor.formatOnSave": true
+	}
 }

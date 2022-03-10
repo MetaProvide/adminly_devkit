@@ -6,9 +6,8 @@
 			"OCA\\Adminly_Dashboard\\": "../adminly_dashboard"
 		}
 	},
-	"require": {},
 	"require-dev": {
 		"nextcloud/coding-standard": "^0.5.0",
-		"christophwurst/nextcloud": "^22"
+		"christophwurst/nextcloud": "^23.0"
 	}
 }

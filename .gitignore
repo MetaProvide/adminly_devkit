@@ -1,5 +1,8 @@
 .env
-/build
-/node_modules
-/vendor
-/.php_cs.cache
+.idea
+*.iml
+vendor/
+build/
+node_modules/
+.php_cs.cache
+js/
