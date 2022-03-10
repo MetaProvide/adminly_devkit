@@ -3,15 +3,6 @@
     "version": "1.0.0",
     "description": "",
     "devDependencies": {
-        "prettier": "^2.5.1",
-        "stylelint": "^13.13.1",
-        "stylelint-config-prettier": "^8.0.2",
-        "stylelint-prettier": "^1.2.0"
-    },
-    "scripts": {
-        "prettier": "prettier --check css js",
-        "prettier:fix": "prettier --write css js",
-        "stylelint": "stylelint css",
-        "stylelint:fix": "stylelint css --fix"
+        "prettier": "^2.5.1"
     }
 }
