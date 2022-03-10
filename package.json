@@ -1,8 +1,8 @@
 {
-    "name": "adminly_devkit",
-    "version": "1.0.0",
-    "description": "",
-    "devDependencies": {
-        "prettier": "^2.5.1"
-    }
+	"name": "adminly_devkit",
+	"version": "1.0.0",
+	"description": "",
+	"devDependencies": {
+		"prettier": "^2.5.1"
+	}
 }
