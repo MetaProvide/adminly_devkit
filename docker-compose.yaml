@@ -45,5 +45,5 @@ services:
       MYSQL_USER: nextcloud
       MYSQL_PASSWORD: nextcloud
       MYSQL_HOST: mariadb:3306
-      NEXTCLOUD_ADMIN_USER: test
+      NEXTCLOUD_ADMIN_USER: testsson
       NEXTCLOUD_ADMIN_PASSWORD: test
