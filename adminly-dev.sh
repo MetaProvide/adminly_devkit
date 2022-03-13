@@ -109,28 +109,28 @@ function setup ()
 {
 	print "Setting up Adminly dev environment"
 	docker-compose up -d
-	docker exec -it adminly_devkit_nextcloud_1 chown www-data /var/www/html/custom_apps
+	docker-compose exec nextcloud chown www-data /var/www/html/custom_apps
 	print "Waiting for Nextcloud to initialise"
-	while ! docker exec -u www-data -it adminly_devkit_nextcloud_1 php occ status | grep -c "installed: true" > /dev/null
+	while ! docker-compose exec -u www-data nextcloud php occ status | grep -c "installed: true" > /dev/null
 	do
 		sleep 1
 	done
 	print "Disabling unneeded apps"
-	docker exec -u www-data -it adminly_devkit_nextcloud_1 php occ app:disable activity dashboard photos firstrunwizard recommendations
+	docker-compose exec -u www-data nextcloud php occ app:disable activity dashboard photos firstrunwizard recommendations
 	print "Install needed apps from Nextcloud app store"
-	docker exec -u www-data -it adminly_devkit_nextcloud_1 php occ app:install calendar
-	docker exec -u www-data -it adminly_devkit_nextcloud_1 php occ app:install side_menu
+	docker-compose exec -u www-data nextcloud php occ app:install calendar
+	docker-compose exec -u www-data nextcloud php occ app:install side_menu
 	print "Configuring Nextcloud"
 	# Configure theming settings
-	docker exec -u www-data -it adminly_devkit_nextcloud_1 php occ theming:config name "Adminly"
-	docker exec -u www-data -it adminly_devkit_nextcloud_1 php occ theming:config slogan "Platform with Human Touch"
-	docker exec -u www-data -it adminly_devkit_nextcloud_1 php occ theming:config url "https://adminly.org"
+	docker-compose exec -u www-data nextcloud php occ theming:config name "Adminly"
+	docker-compose exec -u www-data nextcloud php occ theming:config slogan "Platform with Human Touch"
+	docker-compose exec -u www-data nextcloud php occ theming:config url "https://adminly.org"
 	# Disable rich workspaces
-	docker exec -u www-data -it adminly_devkit_nextcloud_1 php occ config:app:set text workspace_available --value=0
+	docker-compose exec -u www-data nextcloud php occ config:app:set text workspace_available --value=0
 	# Configure side menu / custom menu
-	docker exec -u www-data -it adminly_devkit_nextcloud_1 php occ config:app:set side_menu always-displayed --value=1
+	docker-compose exec -u www-data nextcloud php occ config:app:set side_menu always-displayed --value=1
 	# Enable Adminly apps
-	docker exec -u www-data -it adminly_devkit_nextcloud_1 php occ app:enable adminly_core adminly_dashboard
+	docker-compose exec -u www-data nextcloud php occ app:enable adminly_core adminly_dashboard
 	print "Done!"
 }
 
