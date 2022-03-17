@@ -131,6 +131,8 @@ function setup ()
 	docker-compose exec -u www-data nextcloud php occ config:app:set side_menu always-displayed --value=1
 	# Enable Adminly apps
 	docker-compose exec -u www-data nextcloud php occ app:enable adminly_core adminly_dashboard
+	# Set Adminly Dashboard as the default app
+	docker-compose exec -u www-data nextcloud php occ config:system:set --value="adminly_dashboard,files" defaultapp
 	print "Done!"
 }
 
