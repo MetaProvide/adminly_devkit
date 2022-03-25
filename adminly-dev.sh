@@ -120,7 +120,11 @@ function setup ()
 	print "Install needed apps from Nextcloud app store"
 	docker-compose exec -u www-data nextcloud php occ app:install calendar
 	docker-compose exec -u www-data nextcloud php occ app:install side_menu
+	docker-compose exec -u www-data nextcloud php occ app:install appointments
 	print "Configuring Nextcloud"
+	# Configure user settings
+	docker-compose exec -u www-data nextcloud php occ user:setting -q testsson settings display_name "Testsson Test"
+	docker-compose exec -u www-data nextcloud php occ user:setting testsson settings email "test@example.com"
 	# Configure theming settings
 	docker-compose exec -u www-data nextcloud php occ theming:config name "Adminly"
 	docker-compose exec -u www-data nextcloud php occ theming:config slogan "Platform with Human Touch"
@@ -133,6 +137,31 @@ function setup ()
 	docker-compose exec -u www-data nextcloud php occ app:enable adminly_core adminly_dashboard
 	# Set Adminly Dashboard as the default app
 	docker-compose exec -u www-data nextcloud php occ config:system:set --value="adminly_dashboard,files" defaultapp
+	# Create Appointment slots calendar
+	if ! docker-compose exec -u www-data nextcloud php occ dav:list-calendars testsson | grep -c "appointment-slots" > /dev/null ; then
+		docker-compose exec -u www-data nextcloud php occ dav:create-calendar testsson appointment-slots
+	fi
+	# Update Display name and colour for the calendars
+	docker-compose exec mariadb mysql -u nextcloud -pnextcloud nextcloud \
+		-e "UPDATE oc_calendars SET displayname = 'Main Calendar', calendarcolor = '#0082c9' WHERE principaluri = 'principals/users/testsson' AND uri = 'personal';";
+	docker-compose exec mariadb mysql -u nextcloud -pnextcloud nextcloud \
+		-e "UPDATE oc_calendars SET displayname = 'Appointment Slots', calendarcolor = '#8d12ac' WHERE principaluri = 'principals/users/testsson' AND uri = 'appointment-slots';";
+	# Configure Appointments
+	if docker-compose exec mariadb mysql -u nextcloud -pnextcloud nextcloud -e "SELECT * from oc_appointments_pref;" | grep -c "testsson" > /dev/null ; then
+		docker-compose exec mariadb mysql -u nextcloud -pnextcloud nextcloud \
+			-e "UPDATE oc_appointments_pref
+				SET org_info = '{\"organization\":\"Testsson\",\"email\":\"test@example.com\",\"address\":\"Test heaven\",\"phone\":\"123456789\"}',
+					calendar_settings = '{\"mainCalId\":\"-1\",\"destCalId\":\"-1\",\"nrSrcCalId\":\"3\",\"nrDstCalId\":\"1\",\"nrPushRec\":true,\"nrRequireCat\":false,\"nrAutoFix\":false,\"tmmDstCalId\":\"-1\",\"tmmMoreCals\":[],\"tmmSubscriptions\":[],\"tmmSubscriptionsSync\":\"0\",\"prepTime\":\"0\",\"bufferBefore\":0,\"bufferAfter\":0,\"whenCanceled\":\"mark\",\"allDayBlock\":false,\"privatePage\":false,\"tsMode\":\"1\"}',
+					pages = '{\"p0\":{\"enabled\":1,\"label\":\"\"}}'
+				WHERE user_id = 'testsson';";
+	else
+		docker-compose exec mariadb mysql -u nextcloud -pnextcloud nextcloud \
+			-e "INSERT INTO oc_appointments_pref
+				SET user_id = 'testsson',
+					org_info = '{\"organization\":\"Testsson\",\"email\":\"test@example.com\",\"address\":\"Test heaven\",\"phone\":\"123456789\"}',
+					calendar_settings = '{\"mainCalId\":\"-1\",\"destCalId\":\"-1\",\"nrSrcCalId\":\"3\",\"nrDstCalId\":\"1\",\"nrPushRec\":true,\"nrRequireCat\":false,\"nrAutoFix\":false,\"tmmDstCalId\":\"-1\",\"tmmMoreCals\":[],\"tmmSubscriptions\":[],\"tmmSubscriptionsSync\":\"0\",\"prepTime\":\"0\",\"bufferBefore\":0,\"bufferAfter\":0,\"whenCanceled\":\"mark\",\"allDayBlock\":false,\"privatePage\":false,\"tsMode\":\"1\"}',
+					pages = '{\"p0\":{\"enabled\":1,\"label\":\"\"}}';";
+	fi
 	print "Done!"
 }
 
