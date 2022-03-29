@@ -45,7 +45,7 @@ function get_git_repo ()
 function update_git_repo ()
 {
 	if [ -d "$1" ] ; then
-		git -C "$1" pull
+		git -C "$1" pull --all
 	else
 		print "Repo doesn't exist!"
 	fi
