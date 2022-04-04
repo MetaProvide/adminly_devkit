@@ -14,5 +14,7 @@ $config
 	->notPath('l10n')
 	->notPath('src')
 	->notPath('vendor')
+	->notPath('node_modules')
+	->notPath('cypress')
 	->in(__DIR__);
 return $config;
