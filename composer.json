@@ -2,8 +2,8 @@
 	"autoload-dev": {
 		"psr-4": {
 			"OCP\\": "vendor/christophwurst/nextcloud/OCP",
-			"OCA\\Adminly_Core\\": "../adminly_core",
-			"OCA\\Adminly_Dashboard\\": "../adminly_dashboard"
+			"OCA\\Adminly_Core\\": "../adminly_core/lib/",
+			"OCA\\Adminly_Dashboard\\": "../adminly_dashboard/lib/"
 		}
 	},
 	"require-dev": {
