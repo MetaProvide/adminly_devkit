@@ -5,7 +5,6 @@
 	// List of extensions which should be recommended for users of this workspace.
 	"recommendations": [
 		"editorconfig.editorconfig",
-		"junstyle.php-cs-fixer",
 		"xdebug.php-debug",
 		"bmewburn.vscode-intelephense-client",
 		"esbenp.prettier-vscode"
