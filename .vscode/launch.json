@@ -13,7 +13,8 @@
 				"/var/www/html": "${workspaceFolder}/../nextcloud-server",
 				"/var/www/html/lib/public": "${workspaceFolder}/vendor/christophwurst/nextcloud/OCP",
 				"/var/www/html/custom_apps/adminly_core": "${workspaceFolder}/../adminly_core",
-				"/var/www/html/custom_apps/adminly_dashboard": "${workspaceFolder}/../adminly_dashboard"
+				"/var/www/html/custom_apps/adminly_dashboard": "${workspaceFolder}/../adminly_dashboard",
+				"/var/www/html/custom_apps/appointments": "${workspaceFolder}/../Appointments"
 			}
 		}
 	]
