@@ -84,6 +84,7 @@ function init ()
 	print "Cloning git repos"
 	get_git_repo git@github.com:MetaProvide/adminly_core.git ../adminly_core
 	get_git_repo git@github.com:MetaProvide/adminly_dashboard.git ../adminly_dashboard
+	get_git_repo git@github.com:SergeyMosin/Appointments.git ../Appointments
 	print "Installing dependencies for Adminly Devkit"
 	get_dependencies "."
 	print "Installing dependencies for Adminly Core"
@@ -97,6 +98,7 @@ function update ()
 	print "Updating git repos"
 	update_git_repo "../adminly_core"
 	update_git_repo "../adminly_dashboard"
+	update_git_repo "../Appointments"
 	print "Updating dependencies for Adminly Devkit"
 	update_dependencies "."
 	print "Updating dependencies for Adminly Core"
