@@ -11,6 +11,10 @@
 		{
 			"name": "Adminly Core",
 			"path": "../../adminly_core"
+		},
+		{
+			"name": "Adminly Clients",
+			"path": "../../adminly_clients"
 		}
 	],
 	"settings": {

@@ -3,7 +3,8 @@
 		"psr-4": {
 			"OCP\\": "vendor/christophwurst/nextcloud/OCP",
 			"OCA\\Adminly_Core\\": "../adminly_core/lib/",
-			"OCA\\Adminly_Dashboard\\": "../adminly_dashboard/lib/"
+			"OCA\\Adminly_Dashboard\\": "../adminly_dashboard/lib/",
+			"OCA\\Adminly_Clients\\": "../adminly_clients/lib/"
 		}
 	},
 	"require-dev": {
