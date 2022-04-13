@@ -117,11 +117,12 @@ function setup ()
 	do
 		sleep 1
 	done
+	print "Enabling background jobs with cron"
+	docker-compose exec -u www-data nextcloud php occ background:cron
 	print "Disabling unneeded apps"
 	docker-compose exec -u www-data nextcloud php occ app:disable activity dashboard photos firstrunwizard recommendations
 	print "Install needed apps from Nextcloud app store"
 	docker-compose exec -u www-data nextcloud php occ app:install calendar
-	docker-compose exec -u www-data nextcloud php occ app:install side_menu
 	docker-compose exec -u www-data nextcloud php occ app:install appointments
 	print "Configuring Nextcloud"
 	# Configure user settings
@@ -133,8 +134,6 @@ function setup ()
 	docker-compose exec -u www-data nextcloud php occ theming:config url "https://adminly.org"
 	# Disable rich workspaces
 	docker-compose exec -u www-data nextcloud php occ config:app:set text workspace_available --value=0
-	# Configure side menu / custom menu
-	docker-compose exec -u www-data nextcloud php occ config:app:set side_menu always-displayed --value=1
 	# Enable Adminly apps
 	docker-compose exec -u www-data nextcloud php occ app:enable adminly_core adminly_dashboard
 	# Set Adminly Dashboard as the default app
