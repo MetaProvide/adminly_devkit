@@ -195,11 +195,28 @@ function full_init()
 	setup
 }
 
+function dummy_data ()
+{
+	print "Inserting dummy Adminly Clients data"
+	docker-compose exec mariadb mysql -u nextcloud -pnextcloud nextcloud \
+		-e "INSERT INTO oc_adminly_clients (provider_id, email, name, description)
+			VALUES
+				('testsson', 'test0@example.com', 'Matthew Barnes', 'Some description'),
+				('testsson', 'test1@example.com', 'Poppy Archer', 'Some description'),
+				('testsson', 'test2@example.com', 'Mohammed Clark', 'Some description'),
+				('testsson', 'test3@example.com', 'Jordan Holmes', 'Some description'),
+				('testsson', 'test4@example.com', 'Sean Blake', 'Some description'),
+				('testsson', 'test5@example.com', 'Oscar Mitchell', 'Some description'),
+				('testsson', 'test6@example.com', 'Eva Hopkins', 'Some description'),
+				('testsson', 'test7@example.com', 'Isabella Cooke', 'Some description'),
+				('testsson', 'test8@example.com', 'Brooke Bibi', 'Some description'),
+				('testsson', 'test9@example.com', 'Toby Burgess', 'Some description');";
+}
+
 function display_help ()
 {
 	echo "Adminly dev script"
 	echo "======================================="
-	echo
 	echo "Script for managing the Adminly dev environment"
 	echo
 	echo "Syntax: ./adminly-dev.sh [action]"
@@ -214,7 +231,7 @@ function display_help ()
 	echo "destroy            Brings down the docker containers and deletes related docker volumes"
 	echo "up                 Brings up the docker containers"
 	echo "down               Brings down the docker containers"
-	echo
+	echo "dummy-data         Inserts dummy data into the database"
 	echo "======================================="
 }
 
@@ -245,6 +262,9 @@ case "$1" in
 		;;
 	"down")
 		down
+		;;
+	"dummy-data")
+		dummy_data
 		;;
 	"help")
 		display_help
