@@ -125,7 +125,7 @@ function setup ()
 	print "Enabling background jobs with cron"
 	docker-compose exec -u www-data nextcloud php occ background:cron
 	print "Disabling unneeded apps"
-	docker-compose exec -u www-data nextcloud php occ app:disable activity dashboard photos firstrunwizard recommendations
+	docker-compose exec -u www-data nextcloud php occ app:disable dashboard photos firstrunwizard recommendations
 	print "Install needed apps from Nextcloud app store"
 	docker-compose exec -u www-data nextcloud php occ app:install calendar
 	docker-compose exec -u www-data nextcloud php occ app:install appointments
