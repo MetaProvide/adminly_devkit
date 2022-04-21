@@ -129,6 +129,7 @@ function setup ()
 	print "Install needed apps from Nextcloud app store"
 	docker-compose exec -u www-data nextcloud php occ app:install calendar
 	docker-compose exec -u www-data nextcloud php occ app:install appointments
+	docker-compose exec -u www-data nextcloud php occ app:install spreed
 	print "Configuring Nextcloud"
 	# Configure user settings
 	docker-compose exec -u www-data nextcloud php occ user:setting -q testsson settings display_name "Testsson Test"
@@ -157,16 +158,24 @@ function setup ()
 		docker-compose exec mariadb mysql -u nextcloud -pnextcloud nextcloud \
 			-e "UPDATE oc_appointments_pref
 				SET org_info = '{\"organization\":\"Testsson\",\"email\":\"test@example.com\",\"address\":\"Test heaven\",\"phone\":\"123456789\"}',
-					calendar_settings = '{\"mainCalId\":\"-1\",\"destCalId\":\"-1\",\"nrSrcCalId\":\"3\",\"nrDstCalId\":\"1\",\"nrPushRec\":true,\"nrRequireCat\":false,\"nrAutoFix\":false,\"tmmDstCalId\":\"-1\",\"tmmMoreCals\":[],\"tmmSubscriptions\":[],\"tmmSubscriptionsSync\":\"0\",\"prepTime\":\"0\",\"bufferBefore\":0,\"bufferAfter\":0,\"whenCanceled\":\"mark\",\"allDayBlock\":false,\"privatePage\":false,\"tsMode\":\"1\"}',
-					pages = '{\"p0\":{\"enabled\":1,\"label\":\"\"}}'
+					calendar_settings = '{\"mainCalId\":\"-1\",\"destCalId\":\"-1\",\"nrSrcCalId\":\"3\",\"nrDstCalId\":\"1\",\"nrPushRec\":true,\"nrRequireCat\":false,\"nrAutoFix\":false,\"tmmDstCalId\":\"-1\",\"tmmMoreCals\":[],\"tmmSubscriptions\":[],\"tmmSubscriptionsSync\":\"0\",\"prepTime\":\"15\",\"bufferBefore\":0,\"bufferAfter\":0,\"whenCanceled\":\"mark\",\"allDayBlock\":true,\"privatePage\":false,\"tsMode\":\"1\"}',
+					email_options = '{\"icsFile\":true,\"skipEVS\":false,\"attMod\":true,\"attDel\":true,\"meReq\":true,\"meConfirm\":true,\"meCancel\":true,\"vldNote\":\"\",\"cnfNote\":\"\",\"icsNote\":\"\"}',
+					pages = '{\"p0\":{\"enabled\":1,\"label\":\"\"}}',
+					page_options = '{\"formTitle\":\"\",\"nbrWeeks\":\"12\",\"showEmpty\":false,\"startFNED\":false,\"showWeekends\":false,\"time2Cols\":false,\"endTime\":true,\"hidePhone\":false,\"showTZ\":true,\"gdpr\":\"\",\"gdprNoChb\":false,\"pageTitle\":\"Book your appointment\",\"pageSubTitle\":\"Mindfulness\",\"metaNoIndex\":true,\"pageStyle\":\"\"}',
+					appt_talk = '{\"enabled\":true,\"delete\":true,\"emailText\":\"\",\"lobby\":true,\"password\":false,\"nameFormat\":0,\"formFieldEnable\":true,\"formLabel\":\"\",\"formPlaceholder\":\"\",\"formTxtReal\":\"\",\"formTxtVirtual\":\"\",\"formTxtTypeChange\":\"\"}',
+					reminders = '{\data\:[{\seconds\:\3600\,\actions\:true},{\seconds\:\0\,\actions\:true},{\seconds\:\0\,\actions\:true}],\friday\:false,\moreText\:\\}'
 				WHERE user_id = 'testsson';";
 	else
 		docker-compose exec mariadb mysql -u nextcloud -pnextcloud nextcloud \
 			-e "INSERT INTO oc_appointments_pref
 				SET user_id = 'testsson',
 					org_info = '{\"organization\":\"Testsson\",\"email\":\"test@example.com\",\"address\":\"Test heaven\",\"phone\":\"123456789\"}',
-					calendar_settings = '{\"mainCalId\":\"-1\",\"destCalId\":\"-1\",\"nrSrcCalId\":\"3\",\"nrDstCalId\":\"1\",\"nrPushRec\":true,\"nrRequireCat\":false,\"nrAutoFix\":false,\"tmmDstCalId\":\"-1\",\"tmmMoreCals\":[],\"tmmSubscriptions\":[],\"tmmSubscriptionsSync\":\"0\",\"prepTime\":\"0\",\"bufferBefore\":0,\"bufferAfter\":0,\"whenCanceled\":\"mark\",\"allDayBlock\":false,\"privatePage\":false,\"tsMode\":\"1\"}',
-					pages = '{\"p0\":{\"enabled\":1,\"label\":\"\"}}';";
+					calendar_settings = '{\"mainCalId\":\"-1\",\"destCalId\":\"-1\",\"nrSrcCalId\":\"3\",\"nrDstCalId\":\"1\",\"nrPushRec\":true,\"nrRequireCat\":false,\"nrAutoFix\":false,\"tmmDstCalId\":\"-1\",\"tmmMoreCals\":[],\"tmmSubscriptions\":[],\"tmmSubscriptionsSync\":\"0\",\"prepTime\":\"15\",\"bufferBefore\":0,\"bufferAfter\":0,\"whenCanceled\":\"mark\",\"allDayBlock\":true,\"privatePage\":false,\"tsMode\":\"1\"}',
+					email_options = '{\"icsFile\":true,\"skipEVS\":false,\"attMod\":true,\"attDel\":true,\"meReq\":true,\"meConfirm\":true,\"meCancel\":true,\"vldNote\":\"\",\"cnfNote\":\"\",\"icsNote\":\"\"}',
+					pages = '{\"p0\":{\"enabled\":1,\"label\":\"\"}}',
+					page_options = '{\"formTitle\":\"\",\"nbrWeeks\":\"12\",\"showEmpty\":false,\"startFNED\":false,\"showWeekends\":false,\"time2Cols\":false,\"endTime\":true,\"hidePhone\":false,\"showTZ\":true,\"gdpr\":\"\",\"gdprNoChb\":false,\"pageTitle\":\"Book your appointment\",\"pageSubTitle\":\"Mindfulness\",\"metaNoIndex\":true,\"pageStyle\":\"\"}',
+					appt_talk = '{\"enabled\":true,\"delete\":true,\"emailText\":\"\",\"lobby\":true,\"password\":false,\"nameFormat\":0,\"formFieldEnable\":true,\"formLabel\":\"\",\"formPlaceholder\":\"\",\"formTxtReal\":\"\",\"formTxtVirtual\":\"\",\"formTxtTypeChange\":\"\"}',
+					reminders = '{\data\:[{\seconds\:\3600\,\actions\:true},{\seconds\:\0\,\actions\:true},{\seconds\:\0\,\actions\:true}],\friday\:false,\moreText\:\\}';";
 	fi
 	print "Done!"
 }
