@@ -163,7 +163,7 @@ function setup ()
 					pages = '{\"p0\":{\"enabled\":1,\"label\":\"\"}}',
 					page_options = '{\"formTitle\":\"\",\"nbrWeeks\":\"12\",\"showEmpty\":false,\"startFNED\":false,\"showWeekends\":false,\"time2Cols\":false,\"endTime\":true,\"hidePhone\":false,\"showTZ\":true,\"gdpr\":\"\",\"gdprNoChb\":false,\"pageTitle\":\"Book your appointment\",\"pageSubTitle\":\"Mindfulness\",\"metaNoIndex\":true,\"pageStyle\":\"\"}',
 					appt_talk = '{\"enabled\":true,\"delete\":true,\"emailText\":\"\",\"lobby\":true,\"password\":false,\"nameFormat\":0,\"formFieldEnable\":true,\"formLabel\":\"\",\"formPlaceholder\":\"\",\"formTxtReal\":\"\",\"formTxtVirtual\":\"\",\"formTxtTypeChange\":\"\"}',
-					reminders = '{\data\:[{\seconds\:\3600\,\actions\:true},{\seconds\:\0\,\actions\:true},{\seconds\:\0\,\actions\:true}],\friday\:false,\moreText\:\\}'
+					reminders = '{\"data\":[{\"seconds\":\"3600\",\"actions\":true},{\"seconds\":\"0\",\"actions\":true},{\"seconds\":\"0\",\"actions\":true}],\"friday\":false,\"moreText\":\"\"}'
 				WHERE user_id = 'testsson';";
 	else
 		docker-compose exec mariadb mysql -u nextcloud -pnextcloud nextcloud \
@@ -175,7 +175,7 @@ function setup ()
 					pages = '{\"p0\":{\"enabled\":1,\"label\":\"\"}}',
 					page_options = '{\"formTitle\":\"\",\"nbrWeeks\":\"12\",\"showEmpty\":false,\"startFNED\":false,\"showWeekends\":false,\"time2Cols\":false,\"endTime\":true,\"hidePhone\":false,\"showTZ\":true,\"gdpr\":\"\",\"gdprNoChb\":false,\"pageTitle\":\"Book your appointment\",\"pageSubTitle\":\"Mindfulness\",\"metaNoIndex\":true,\"pageStyle\":\"\"}',
 					appt_talk = '{\"enabled\":true,\"delete\":true,\"emailText\":\"\",\"lobby\":true,\"password\":false,\"nameFormat\":0,\"formFieldEnable\":true,\"formLabel\":\"\",\"formPlaceholder\":\"\",\"formTxtReal\":\"\",\"formTxtVirtual\":\"\",\"formTxtTypeChange\":\"\"}',
-					reminders = '{\data\:[{\seconds\:\3600\,\actions\:true},{\seconds\:\0\,\actions\:true},{\seconds\:\0\,\actions\:true}],\friday\:false,\moreText\:\\}';";
+					reminders = '{\"data\":[{\"seconds\":\"3600\",\"actions\":true},{\"seconds\":\"0\",\"actions\":true},{\"seconds\":\"0\",\"actions\":true}],\"friday\":false,\"moreText\":\"\"}';";
 	fi
 	print "Done!"
 }
