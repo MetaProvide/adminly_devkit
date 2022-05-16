@@ -101,6 +101,7 @@ function update ()
 	print "Updating git repos"
 	update_git_repo "../adminly_core"
 	update_git_repo "../adminly_dashboard"
+	update_git_repo "../adminly_clients"
 	update_git_repo "../Appointments"
 	print "Updating dependencies for Adminly Devkit"
 	update_dependencies "."
