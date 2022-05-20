@@ -85,7 +85,7 @@ function init ()
 	get_git_repo git@github.com:MetaProvide/adminly_core.git ../adminly_core
 	get_git_repo git@github.com:MetaProvide/adminly_dashboard.git ../adminly_dashboard
 	get_git_repo git@github.com:MetaProvide/adminly_clients.git ../adminly_clients
-	get_git_repo git@github.com:SergeyMosin/Appointments.git ../Appointments
+	get_git_repo git@github.com:MetaProvide/Appointments.git ../Appointments
 	print "Installing dependencies for Adminly Devkit"
 	get_dependencies "."
 	print "Installing dependencies for Adminly Core"
@@ -94,6 +94,8 @@ function init ()
 	get_dependencies "../adminly_dashboard"
 	print "Installing dependencies for Adminly Clients"
 	get_dependencies "../adminly_clients"
+	print "Installing dependencies for Appointments"
+	get_dependencies "../Appointments"
 }
 
 function update ()
@@ -129,7 +131,6 @@ function setup ()
 	docker-compose exec -u www-data nextcloud php occ app:disable dashboard photos firstrunwizard recommendations
 	print "Install needed apps from Nextcloud app store"
 	docker-compose exec -u www-data nextcloud php occ app:install calendar
-	docker-compose exec -u www-data nextcloud php occ app:install appointments
 	docker-compose exec -u www-data nextcloud php occ app:install spreed
 	print "Configuring Nextcloud"
 	# Configure user settings
@@ -142,7 +143,7 @@ function setup ()
 	# Disable rich workspaces
 	docker-compose exec -u www-data nextcloud php occ config:app:set text workspace_available --value=0
 	# Enable Adminly apps
-	docker-compose exec -u www-data nextcloud php occ app:enable adminly_core adminly_dashboard adminly_clients
+	docker-compose exec -u www-data nextcloud php occ app:enable appointments adminly_core adminly_dashboard adminly_clients
 	# Set Adminly Dashboard as the default app
 	docker-compose exec -u www-data nextcloud php occ config:system:set --value="adminly_dashboard,files" defaultapp
 	# Create Appointment slots calendar
