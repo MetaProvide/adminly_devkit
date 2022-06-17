@@ -15,6 +15,7 @@
 				"/var/www/html/custom_apps/adminly_core": "${workspaceFolder}/../adminly_core",
 				"/var/www/html/custom_apps/adminly_dashboard": "${workspaceFolder}/../adminly_dashboard",
 				"/var/www/html/custom_apps/adminly_clients": "${workspaceFolder}/../adminly_clients",
+				"/var/www/html/custom_apps/calendar": "${workspaceFolder}/../adminly_calendar",
 				"/var/www/html/custom_apps/appointments": "${workspaceFolder}/../Appointments"
 			}
 		}
