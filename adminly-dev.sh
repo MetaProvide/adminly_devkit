@@ -232,7 +232,7 @@ function display_help ()
 	echo "Actions:"
 	echo "---------------------------------------"
 	echo "help               Display this help"
-	echo "init               "
+	echo "init               Install local dev environment dependencies"
 	echo "get				 Git clones and then installs dependencies for all Adminly repos"
 	echo "setup              Spins up the docker containers and configures Nextcloud"
 	echo "update             Git pulls and updates dependencies for all Adminly repos"
