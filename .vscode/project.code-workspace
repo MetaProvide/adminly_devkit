@@ -17,6 +17,10 @@
 			"path": "../../adminly_clients"
 		},
 		{
+			"name": "Adminly Calendar",
+			"path": "../../adminly_calendar"
+		},
+		{
 			"name": "Appointments",
 			"path": "../../Appointments"
 		}

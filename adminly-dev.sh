@@ -81,6 +81,20 @@ function update_dependencies ()
 function init ()
 {
 	print "Initialising Adminly dev environment"
+
+	if [ ! -d "$HOME/bin/npm-7.24" ] ; then
+		print "Downloading and installing npm7"
+		mkdir -p "$HOME/bin"
+		curl -sS "https://space.metaprovide.org/s/FxfemqY7fkaY349/download/npm-7.24.zip" -o "$HOME/bin/npm-7.24.zip"
+		unzip -qq "$HOME/bin/npm-7.24.zip" -d "$HOME/bin"
+		ln -s "$HOME/bin/npm-7.24/bin/npm-cli.js" "$HOME/bin/npm"
+		rm "$HOME/bin/npm-7.24.zip"
+	fi
+}
+
+function get ()
+{
+	print "Retrieving Adminly dev repos"
 	print "Cloning git repos"
 	get_git_repo git@github.com:MetaProvide/adminly_core.git ../adminly_core
 	get_git_repo git@github.com:MetaProvide/adminly_dashboard.git ../adminly_dashboard
@@ -152,9 +166,9 @@ function setup ()
 	fi
 	# Update Display name and colour for the calendars
 	docker-compose exec mariadb mysql -u nextcloud -pnextcloud nextcloud \
-		-e "UPDATE oc_calendars SET displayname = 'Main Calendar', calendarcolor = '#0082c9' WHERE principaluri = 'principals/users/testsson' AND uri = 'personal';";
+		-e "UPDATE oc_calendars SET displayname = 'Event', calendarcolor = '#0082c9' WHERE principaluri = 'principals/users/testsson' AND uri = 'personal';";
 	docker-compose exec mariadb mysql -u nextcloud -pnextcloud nextcloud \
-		-e "UPDATE oc_calendars SET displayname = 'Appointment Slots', calendarcolor = '#8d12ac' WHERE principaluri = 'principals/users/testsson' AND uri = 'appointment-slots';";
+		-e "UPDATE oc_calendars SET displayname = 'Slot', calendarcolor = '#8d12ac' WHERE principaluri = 'principals/users/testsson' AND uri = 'appointment-slots';";
 	# Configure Appointments
 	if docker-compose exec mariadb mysql -u nextcloud -pnextcloud nextcloud -e "SELECT * from oc_appointments_pref;" | grep -c "testsson" > /dev/null ; then
 		docker-compose exec mariadb mysql -u nextcloud -pnextcloud nextcloud \
@@ -203,25 +217,8 @@ function down ()
 function full_init()
 {
 	init
+	get
 	setup
-}
-
-function dummy_data ()
-{
-	print "Inserting dummy Adminly Clients data"
-	docker-compose exec mariadb mysql -u nextcloud -pnextcloud nextcloud \
-		-e "INSERT INTO oc_adminly_clients (provider_id, email, name, description)
-			VALUES
-				('testsson', 'test0@example.com', 'Matthew Barnes', 'Some description'),
-				('testsson', 'test1@example.com', 'Poppy Archer', 'Some description'),
-				('testsson', 'test2@example.com', 'Mohammed Clark', 'Some description'),
-				('testsson', 'test3@example.com', 'Jordan Holmes', 'Some description'),
-				('testsson', 'test4@example.com', 'Sean Blake', 'Some description'),
-				('testsson', 'test5@example.com', 'Oscar Mitchell', 'Some description'),
-				('testsson', 'test6@example.com', 'Eva Hopkins', 'Some description'),
-				('testsson', 'test7@example.com', 'Isabella Cooke', 'Some description'),
-				('testsson', 'test8@example.com', 'Brooke Bibi', 'Some description'),
-				('testsson', 'test9@example.com', 'Toby Burgess', 'Some description');";
 }
 
 function display_help ()
@@ -235,14 +232,13 @@ function display_help ()
 	echo "Actions:"
 	echo "---------------------------------------"
 	echo "help               Display this help"
-	echo "init               Git clones and then installs dependencies for all Adminly repos"
+	echo "init               Install local dev environment dependencies"
+	echo "get				 Git clones and then installs dependencies for all Adminly repos"
 	echo "setup              Spins up the docker containers and configures Nextcloud"
-	echo "full-init          Runs init followed by setup"
 	echo "update             Git pulls and updates dependencies for all Adminly repos"
 	echo "destroy            Brings down the docker containers and deletes related docker volumes"
 	echo "up                 Brings up the docker containers"
 	echo "down               Brings down the docker containers"
-	echo "dummy-data         Inserts dummy data into the database"
 	echo "======================================="
 }
 
@@ -256,11 +252,11 @@ case "$1" in
 	"init")
 		init
 		;;
+	"get")
+		get
+		;;
 	"setup")
 		setup
-		;;
-	"full-init")
-		full_init
 		;;
 	"update")
 		update

@@ -38,6 +38,7 @@ services:
       - ../adminly_core:/var/www/html/custom_apps/adminly_core
       - ../adminly_dashboard:/var/www/html/custom_apps/adminly_dashboard
       - ../adminly_clients:/var/www/html/custom_apps/adminly_clients
+      - ../adminly_calendar:/var/www/html/custom_apps/calendar
       - ../Appointments:/var/www/html/custom_apps/appointments
     ports:
       - "80:80"
