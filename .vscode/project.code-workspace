@@ -29,7 +29,9 @@
 		"editor.formatOnSave": true,
 		"intelephense.environment.includePaths": [
 			"../nextcloud-server/apps/dav/lib/",
-			"../Appointments/lib"
+			"../Appointments/lib",
+			"../nextcloud-spreed/lib/",
+			"../nextcloud-notifications/lib/"
 		]
 	}
 }

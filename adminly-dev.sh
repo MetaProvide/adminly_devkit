@@ -121,6 +121,7 @@ function update ()
 	update_git_repo "../adminly_core"
 	update_git_repo "../adminly_dashboard"
 	update_git_repo "../adminly_clients"
+	update_git_repo "../adminly_calendar"
 	update_git_repo "../Appointments"
 	print "Updating dependencies for Adminly Devkit"
 	update_dependencies "."
@@ -132,6 +133,8 @@ function update ()
 	update_dependencies ../adminly_clients
 	print "Updating dependencies for Adminly Calendar"
 	update_dependencies ../adminly_calendar
+	print "Updating dependencies for Appointments"
+	update_dependencies ../Appointments
 }
 
 function setup ()
@@ -164,7 +167,7 @@ function setup ()
 	# Enable Adminly apps
 	docker-compose exec -u www-data nextcloud php occ app:enable appointments adminly_core adminly_dashboard adminly_clients adminly_calendar
 	# Set Adminly Dashboard as the default app
-	docker-compose exec -u www-data nextcloud php occ config:system:set --value="adminly_dashboard,files" defaultapp
+	docker-compose exec -u www-data nextcloud php occ config:system:set --value="adminly_dashboard,spreed,files" defaultapp
 	# Create Appointment slots calendar
 	if ! docker-compose exec -u www-data nextcloud php occ dav:list-calendars testsson | grep -c "appointment-slots" > /dev/null ; then
 		docker-compose exec -u www-data nextcloud php occ dav:create-calendar testsson appointment-slots
