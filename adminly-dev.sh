@@ -166,6 +166,8 @@ function setup ()
 	docker-compose exec -u www-data nextcloud php occ config:app:set text workspace_available --value=0
 	# Enable Adminly apps
 	docker-compose exec -u www-data nextcloud php occ app:enable appointments adminly_core adminly_dashboard adminly_clients adminly_calendar
+	# Change default email template
+	docker-compose exec -u www-data nextcloud php occ config:system:set --value="OCA\\Adminly_Core\\Mail\\EMailTemplate" mail_template_class
 	# Set Adminly Dashboard as the default app
 	docker-compose exec -u www-data nextcloud php occ config:system:set --value="adminly_dashboard,spreed,files" defaultapp
 	# Create Appointment slots calendar
