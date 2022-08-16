@@ -152,7 +152,6 @@ function setup ()
 	print "Disabling unneeded apps"
 	docker-compose exec -u www-data nextcloud php occ app:disable dashboard photos firstrunwizard recommendations
 	print "Install needed apps from Nextcloud app store"
-	docker-compose exec -u www-data nextcloud php occ app:install calendar
 	docker-compose exec -u www-data nextcloud php occ app:install spreed
 	print "Configuring Nextcloud"
 	# Configure user settings
@@ -165,7 +164,7 @@ function setup ()
 	# Disable rich workspaces
 	docker-compose exec -u www-data nextcloud php occ config:app:set text workspace_available --value=0
 	# Enable Adminly apps
-	docker-compose exec -u www-data nextcloud php occ app:enable appointments adminly_core adminly_dashboard adminly_clients adminly_calendar
+	docker-compose exec -u www-data nextcloud php occ app:enable appointments adminly_core adminly_dashboard adminly_clients calendar
 	# Change default email template
 	docker-compose exec -u www-data nextcloud php occ config:system:set --value="OCA\\Adminly_Core\\Mail\\EMailTemplate" mail_template_class
 	# Set Adminly Dashboard as the default app
