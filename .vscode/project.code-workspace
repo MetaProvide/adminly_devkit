@@ -23,6 +23,10 @@
 		{
 			"name": "Appointments",
 			"path": "../../Appointments"
+		},
+		{
+			"name": "TimeManager",
+			"path": "../../timemanager"
 		}
 	],
 	"settings": {
