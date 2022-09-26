@@ -102,6 +102,7 @@ function get ()
 	get_git_repo git@github.com:MetaProvide/adminly_calendar.git ../adminly_calendar
 	get_git_repo git@github.com:MetaProvide/Appointments.git ../Appointments
 	get_git_repo git@github.com:MetaProvide/timemanager.git ../timemanager
+	get_git_repo git@github.com:MetaProvide/spreed.git ../spreed
 	print "Installing dependencies for Adminly Devkit"
 	get_dependencies "."
 	print "Installing dependencies for Adminly Core"
@@ -117,6 +118,8 @@ function get ()
 	get_dependencies "../adminly_calendar"
 	print "Installing dependencies for TimeManager"
 	get_dependencies "../timemanager"
+	print "Installing dependencies for Talk"
+	get_dependencies "../spreed"
 }
 
 function update ()
@@ -128,6 +131,7 @@ function update ()
 	update_git_repo "../adminly_calendar"
 	update_git_repo "../Appointments"
 	update_git_repo "../timemanager"
+	update_git_repo "../spreed"
 	print "Updating dependencies for Adminly Devkit"
 	update_dependencies "."
 	print "Updating dependencies for Adminly Core"
@@ -142,6 +146,8 @@ function update ()
 	update_dependencies ../Appointments
 	print "Updating dependencies for TimeManager"
 	update_dependencies ../timemanager
+	print "Updating dependencies for Talk"
+	update_dependencies ../spreed
 }
 
 function setup ()

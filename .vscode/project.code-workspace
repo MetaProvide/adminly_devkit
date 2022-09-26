@@ -27,6 +27,9 @@
 		{
 			"name": "TimeManager",
 			"path": "../../timemanager"
+		},
+		{
+			"path": "../../spreed"
 		}
 	],
 	"settings": {
@@ -34,7 +37,7 @@
 		"intelephense.environment.includePaths": [
 			"../nextcloud-server/apps/dav/lib/",
 			"../Appointments/lib",
-			"../nextcloud-spreed/lib/",
+			"../spreed/lib/",
 			"../nextcloud-notifications/lib/"
 		]
 	}
