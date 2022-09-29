@@ -3,9 +3,11 @@ volumes:
   mariadb:
   nextcloud:
 
+
 networks:
   frontend:
   backend:
+
 
 services:
   mariadb:
@@ -41,6 +43,7 @@ services:
       - ../adminly_calendar:/var/www/html/custom_apps/calendar
       - ../Appointments:/var/www/html/custom_apps/appointments
       - ../timemanager:/var/www/html/custom_apps/timemanager
+      - ../spreed:/var/www/html/custom_apps/spreed
     ports:
       - "80:80"
       - "443:443"

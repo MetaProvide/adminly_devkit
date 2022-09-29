@@ -18,8 +18,8 @@
 				"/var/www/html/custom_apps/adminly_clients": "${workspaceFolder}/../adminly_clients",
 				"/var/www/html/custom_apps/calendar": "${workspaceFolder}/../adminly_calendar",
 				"/var/www/html/custom_apps/appointments": "${workspaceFolder}/../Appointments",
-				"/var/www/html/custom_apps/spreed": "${workspaceFolder}/../nextcloud-spreed",
-				"/var/www/html/custom_apps/timemanager": "${workspaceFolder}/../timemanager"
+				"/var/www/html/custom_apps/spreed": "${workspaceFolder}/../spreed",
+				"/var/www/html/custom_apps/timemanager": "${workspaceFolder}/../timemanager",
 			}
 		}
 	]
