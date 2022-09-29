@@ -29,6 +29,7 @@
 			"path": "../../timemanager"
 		},
 		{
+			"name": "Talk",
 			"path": "../../spreed"
 		}
 	],
