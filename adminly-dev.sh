@@ -103,6 +103,7 @@ function get ()
 	get_git_repo git@github.com:MetaProvide/Appointments.git ../Appointments
 	get_git_repo git@github.com:MetaProvide/timemanager.git ../timemanager
 	get_git_repo git@github.com:MetaProvide/spreed.git ../spreed
+	get_git_repo git@github.com:MetaProvide/adminly_notifications.git ../adminly_notifications
 	print "Installing dependencies for Adminly Devkit"
 	get_dependencies "."
 	print "Installing dependencies for Adminly Core"
@@ -120,6 +121,8 @@ function get ()
 	get_dependencies "../timemanager"
 	print "Installing dependencies for Talk"
 	get_dependencies "../spreed"
+	print "Installing dependencies for Notifications"
+	get_dependencies "../adminly_notifications"
 }
 
 function update ()
@@ -132,6 +135,7 @@ function update ()
 	update_git_repo "../Appointments"
 	update_git_repo "../timemanager"
 	update_git_repo "../spreed"
+	update_git_repo "../adminly_notifications"
 	print "Updating dependencies for Adminly Devkit"
 	update_dependencies "."
 	print "Updating dependencies for Adminly Core"
@@ -148,6 +152,8 @@ function update ()
 	update_dependencies ../timemanager
 	print "Updating dependencies for Talk"
 	update_dependencies ../spreed
+	print "Updating dependencies for Notifications"
+	update_dependencies ../adminly_notifications
 }
 
 function setup ()
@@ -175,7 +181,7 @@ function setup ()
 	# Disable rich workspaces
 	docker-compose exec -u www-data nextcloud php occ config:app:set text workspace_available --value=0
 	# Enable Adminly apps
-	docker-compose exec -u www-data nextcloud php occ app:enable appointments adminly_core adminly_dashboard adminly_clients calendar timemanager spreed
+	docker-compose exec -u www-data nextcloud php occ app:enable appointments adminly_core adminly_dashboard adminly_clients calendar timemanager spreed notifications
 	# Change default email template
 	docker-compose exec -u www-data nextcloud php occ config:system:set --value="OCA\\Adminly_Core\\Mail\\EMailTemplate" mail_template_class
 	# Set Adminly Dashboard as the default app
