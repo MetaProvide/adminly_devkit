@@ -44,6 +44,7 @@ services:
       - ../Appointments:/var/www/html/custom_apps/appointments
       - ../timemanager:/var/www/html/custom_apps/timemanager
       - ../spreed:/var/www/html/custom_apps/spreed
+      - ../adminly_notifications:/var/www/html/apps/notifications
     ports:
       - "80:80"
       - "443:443"

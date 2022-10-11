@@ -31,6 +31,10 @@
 		{
 			"name": "Talk",
 			"path": "../../spreed"
+		},
+		{
+			"name": "Notifications",
+			"path": "../../adminly_notifications"
 		}
 	],
 	"settings": {
@@ -39,7 +43,7 @@
 			"../nextcloud-server/apps/dav/lib/",
 			"../Appointments/lib",
 			"../spreed/lib/",
-			"../nextcloud-notifications/lib/"
+			"../adminly_notifications/lib/"
 		]
 	}
 }
