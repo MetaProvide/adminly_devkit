@@ -81,15 +81,6 @@ function update_dependencies ()
 function init ()
 {
 	print "Initialising Adminly dev environment"
-
-	if [ ! -d "$HOME/bin/npm-7.24" ] ; then
-		print "Downloading and installing npm7"
-		mkdir -p "$HOME/bin"
-		curl -sS "https://space.metaprovide.org/s/FxfemqY7fkaY349/download/npm-7.24.zip" -o "$HOME/bin/npm-7.24.zip"
-		unzip -qq "$HOME/bin/npm-7.24.zip" -d "$HOME/bin"
-		ln -s "$HOME/bin/npm-7.24/bin/npm-cli.js" "$HOME/bin/npm"
-		rm "$HOME/bin/npm-7.24.zip"
-	fi
 }
 
 function get ()
